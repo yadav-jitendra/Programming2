@@ -8,15 +8,23 @@
 #include <string>
 
 class Person {
-public:
+private:
     std::string firstName;
     std::string lastName;
+    int age;
 
+public:
+    Person();                                           //Empty constructor
     Person(std::string first, std::string last);        // Constructor
-    Person();   //Empty constructor
+    ~Person();
 
-    //Person() = delete;    // if you want Person p(); should not be allowed
-    //Person() = default;
+    void setFirstName(std::string fname);
+    void setLastName(std::string lname);
+    void setAge(int newAge);
+
+    std::string getFirstName();
+    std::string getLastName();
+    int getAge();
 
     std::string printFullName();
 

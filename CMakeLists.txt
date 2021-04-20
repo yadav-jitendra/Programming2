@@ -3,4 +3,4 @@ project(StartingC__)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(StartingC__ basics.cpp functions.cpp functions.h Person.cpp Person.h)
+add_executable(StartingC__ basics.cpp functions.cpp functions.h Person.cpp Person.h Student.cpp Student.h)

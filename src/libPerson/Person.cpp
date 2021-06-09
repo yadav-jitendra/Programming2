@@ -12,7 +12,7 @@ using std::endl;
 int Person::g_id = 0;
 
 Person::Person(std::string first, std::string last)
-:firstName(first), lastName(last)
+:firstName(first), lastName(last), id(g_id)
 {
     ++g_id;
 }
@@ -25,6 +25,24 @@ Person::Person()                                            //calls empty constr
 Person::~Person(){
 }
 
+
+int Person::getID() const {
+    return id;
+}
+
+std::string Person::getFullName() const{
+    return firstName + " " + lastName;
+}
+
+void Person::setAge(int newAge){
+    if (newAge < 0){
+        age = 0;
+    } else{
+        age = newAge;
+    }
+}
+
+
 /**
      * Operator overloading
      */
@@ -36,24 +54,6 @@ Person& Person::operator+=(Person const & p){
     return *this;
 }
 
-
-int Person::getID() const {
-    return id;
-}
-
-std::string Person::getFullName() const{
-    return firstName + " " + lastName;
-}
-
-
-void Person::setAge(int newAge){
-    if (newAge < 0){
-        age = 0;
-    } else{
-        age = newAge;
-    }
-}
-
 bool Person::operator<( Person const & other) const {
     return this->id < other.id;
 }
@@ -62,8 +62,6 @@ bool Person::operator<(int v) const {
     return this->id < v;
 }
 
-bool operator<(int lhs, Person const & rhs){
-    return lhs < rhs.id;
+bool operator<(int val, const Person &other) {
+    return val < other.getID();
 }
-
-

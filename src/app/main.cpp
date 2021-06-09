@@ -6,6 +6,8 @@ using std::endl;
 #include <vector>
 using std::vector;
 
+#include <algorithm>
+
 #include <memory>
 #include <exception>
 
@@ -17,6 +19,7 @@ using std::vector;
 #include "Person.h"
 #include "Student.h"
 #include "House.h"
+#include "lambda.h"
 
 /**
  * Template
@@ -63,16 +66,14 @@ void printfullname(Person const & per){
 
 /**
  * Interface
- */
+ * */
 class Iplayable{
 public:
     virtual void init() = 0;
 };
 
 
-/**
-polymorphism
-*/
+/**polymorphism*/
 void printMatrikelNr(Person const & p){
     Student const * student = dynamic_cast<Student const *>(&p);
     if (student){
@@ -87,21 +88,71 @@ void printMatrikelNr(Person const & p){
  */
 int main() {
     using namespace std;
-/**
-    Template
-*/
-    cout << mymin(1.5, 2) << endl;
-    cout << mymin(string("hello "), string("world")) << endl;
 
-//    Person p1("Hari", "prased");
-//    Person p2("ram", "kumar");
+    /**Lambdas*/
+//    auto isEven = [](int toCheck){ return toCheck % 2 == 0; };
 //
-//    cout << ((p1 < p2)? "true" : "false") << endl;
+//    vector<int> nums = {0,1,2,3,4,5,6,-1,-2};
+//
+//    // traditional way
+//    int evens = 0;
+//    for (int i = 0; i < nums.size() ; ++i){
+//        if(isEven(nums[i])){
+//            ++evens;
+//        }
+//    }
+//    cout << "noOfevens: " << evens << endl;
+//
+//    // using count_if
+//    cout << "noOfevens: " << count_if(begin(nums), end(nums), isEven)<< endl;
+//    cout << "noOfodds: " << count_if(begin(nums), end(nums), [](int v){return v % 2 != 0;})<< endl;
+//
+//    bool is4Even = isEven(4);
+//    cout << is4Even << endl;
+
+/** functor */
+//auto lamb = [](int val){ return val;};
+//Functor func ;     // both are equivalent (defined in lambda.h)
+//func.x = 10;
+//
+//cout << lamb(7) << endl;
+//cout << func(7) << endl;
+
+/**Lambda Captures*/
+//auto add3 = createLambda(3);
+//auto add5 = createLambda(5);
+//cout << "add 3 + 10 = " << add3(10) << endl;
+//cout << "add 3 + 20 = " << add3(20) << endl;
+//cout << "add 5 + 10 = " <<  add5(10) << endl;
+
+    int x = 1;
+    int y = 2;
+    int z = 3;
+
+    auto increment = [&, a=x+10]() mutable {
+        x = a;
+        ++y;
+        ++z;
+    };
+
+    increment();
+
+
+
+/**Template*/
+//    cout << mymin(1.5, 2) << endl;
+//    cout << mymin(string("hello "), string("world")) << endl;
+//
+//    Person p1("Hari", "Prased");
+//    Person p2("Ram", "Kumar");
+//    cout << "Hari id: " << p1.getID() << endl;
+//    cout << "Ram id: " <<p2.getID() << endl;
+//    cout << "hari ID is smaller than ram : " << ((p1 < p2)? "true" : "false") << endl;
 //    cout << "hari ID is smaller than 4 : " << ((p1 < 4)? "true" : "false") << endl;
 //    cout << "4 is smaller than hari ID : " << ((4 < p1)? "true" : "false") << endl;
-
+//
 //    Accumulator<Person> acc3(Person("Ram", "kumar"));
-//    acc3.add(Person("Hari", "Prassd"));
+//    acc3.add(Person("Hari", "Prasad"));
 //    cout << acc3.getValue().getFullName() << endl;
 
 //    Accumulator<double> accumulator(1.3);
@@ -117,9 +168,8 @@ int main() {
 //    cout << minimum(string("Hello"), string("world")) << endl;  // template
 //    cout << minimum(1,2);  // template
 //
-    /**
-     * Exception
-     */
+
+    /**Exception  */
 //    vector v = {1,2,3};
 //    for (int i = 0; i < v.size() + 1 ; ++i) {
 //        try {
@@ -135,9 +185,7 @@ int main() {
 //    }
 
 
-    /**
-     * POLYMORPHISM
-     */
+    /**POLYMORPHISM*/
 //    Student stu("Hari", "Sharma", "012345");
 //    Person p;     // Abstract class instantiation not Possible
 //    Person& per = stu;

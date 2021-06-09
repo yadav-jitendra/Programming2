@@ -11,22 +11,35 @@ class Person {
 private:
     std::string firstName;
     std::string lastName;
+
+    static int g_id;
+    int id;
     int age;
+
+    friend bool operator<(int lhs, Person const & rhs);
 
 public:
     Person();                                           //Empty constructor
     Person(std::string first, std::string last);        // Constructor
-    ~Person();
+    virtual ~Person();
 
-    void setFirstName(std::string fname);
-    void setLastName(std::string lname);
+    /**
+     * Operator overloading
+     */
+     Person& operator+=(Person const & p);
+     bool operator<(Person const & other) const;
+     bool operator<(int v) const;
+
     void setAge(int newAge);
 
-    std::string getFirstName();
-    std::string getLastName();
-    int getAge();
+    int getID() const;
+    virtual std::string getFullName() const;
+    /**
+ * VIRTUAL DEMO
+ * to make class ABSTRACT "= 0"
+ */
+//    virtual std::string getFullName() const = 0;
 
-    std::string printFullName();
 
 };
 

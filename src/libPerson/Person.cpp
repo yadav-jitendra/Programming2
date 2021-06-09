@@ -7,37 +7,44 @@
 using std::cout;
 using std::endl;
 
+#include <string>
+
+int Person::g_id = 0;
+
 Person::Person(std::string first, std::string last)
 :firstName(first), lastName(last)
-{}
+{
+    ++g_id;
+}
 
 Person::Person()                                            //calls empty constructor
 : Person("Default", "Constructor")               //calls first constructor with value
-{}
-
-Person::~Person(){
-    cout << "deleting : " <<firstName << " "<< lastName << endl;
+{
 }
 
-std::string Person::printFullName(){
+Person::~Person(){
+}
+
+/**
+     * Operator overloading
+     */
+Person& Person::operator+=(Person const & p){
+    firstName += " " + p.firstName;
+    lastName += " " + p.lastName;
+    id += p.id;
+
+    return *this;
+}
+
+
+int Person::getID() const {
+    return id;
+}
+
+std::string Person::getFullName() const{
     return firstName + " " + lastName;
 }
 
-void Person::setFirstName(std::string fname) {
-    firstName = fname;
-}
-
-void Person::setLastName(std::string lname) {
-    lastName = lname;
-}
-
-std::string Person::getFirstName() {
-    return firstName;
-}
-
-std::string Person::getLastName() {
-    return lastName;
-}
 
 void Person::setAge(int newAge){
     if (newAge < 0){
@@ -47,8 +54,16 @@ void Person::setAge(int newAge){
     }
 }
 
-int Person::getAge(){
-    return age;
+bool Person::operator<( Person const & other) const {
+    return this->id < other.id;
+}
+
+bool Person::operator<(int v) const {
+    return this->id < v;
+}
+
+bool operator<(int lhs, Person const & rhs){
+    return lhs < rhs.id;
 }
 
 

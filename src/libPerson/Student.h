@@ -14,8 +14,12 @@ private:
 
 public:
     Student(std::string fist,std::string last,std::string matrikel );
-    void setMatrikel(std::string matrikel);
-    std::string getMatrikel();
+
+    virtual ~Student();
+
+    std::string getMatrikel() const;
+
+    std::string getFullName() const override;
 
 };
 

@@ -55,7 +55,11 @@ Person& Person::operator+=(Person const & p){
 }
 
 bool Person::operator<( Person const & other) const {
-    return this->id < other.id;
+    //return this->id < other.id;
+    if (this->firstName == other.firstName){
+        return this->lastName < other.lastName;
+    }
+    return this->firstName < other.firstName;
 }
 
 bool Person::operator<(int v) const {

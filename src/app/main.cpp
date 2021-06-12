@@ -14,6 +14,21 @@ using std::vector;
 #include <typeinfo>
 #include "Messenger.h"
 
+#include <tuple>
+using std::tuple;
+using std::make_tuple;
+using std::get;
+
+#include <utility>
+using std::pair;
+using std::make_pair;
+
+#include <array>
+using std::array;
+#include <list>
+#include <set>
+
+#include "ituple.h"
 
 #include "functions.h"
 #include "Person.h"
@@ -21,73 +36,133 @@ using std::vector;
 #include "House.h"
 #include "lambda.h"
 
-/**
- * Template
- * */
-#include "templateFunctions.h"
-#include "Accumulator.h"
-template <class T1, class T2>
-T1 mymin(T1 lhs, T2 rhs){
-    return (lhs < rhs)? lhs : rhs;
-}
+#include <map>
+#include "helper.h"
+#include <unordered_set>
+#include <unordered_map>
+#include "stackDemo.h"
+#include "QueueDemo.h"
+#include "priorityqueueDemo.h"
 
-int increment(int& x){
-    return ++x;
-}
-
-enum class Status{
-    started,
-    workInProgress,
-    completed
-
-};
-
-
-using Address = House*;
-class Packet{
+///BadHash Functor
+class BadHash{
 public:
-    Address address;
-
+    int operator()(int) const { return 1; };
 };
-
-
-void testIfAlive(std::unique_ptr<int> const & ptr){
-    if (ptr){
-        cout << "still alive" << endl;
-    } else{
-        cout << "Gone" << endl;
-    }
-}
-
-// Slicing without const &
-void printfullname(Person const & per){
-    cout << per.getFullName() << endl;
-}
-
-/**
- * Interface
- * */
-class Iplayable{
-public:
-    virtual void init() = 0;
-};
-
-
-/**polymorphism*/
-void printMatrikelNr(Person const & p){
-    Student const * student = dynamic_cast<Student const *>(&p);
-    if (student){
-        cout << student->getMatrikel() << endl;
-    } else{
-        cout << "Casting not possible" << endl;
-    }
-}
 
 /**
  * MAIN METHODE
  */
 int main() {
     using namespace std;
+
+    /// stack
+//    stackDemo();
+
+    /// queue
+//    queueDemo();
+
+    /// priority_queue
+    priorityQueueDemo();
+
+    /// unordered_set
+//  unordered_set<int> uset; // without BadHash : default hash function
+//  unordered_set<int, BadHash> uset; // using Fuctor
+//    auto badHash = [](int){ return 1;};
+//    unordered_set<int, decltype(badHash)> uset(0, badHash); // using lambdas
+//    for (int i = 0; i <10 ; ++i) {
+//        uset.insert(i);
+//    }
+//    for (auto i : uset){
+//        cout << i << ", ";
+//    }
+
+
+    /**map*/ // <map> : sorted nach key werte ///tree
+//    map<string, int> map = {{"ram", 124} ,{"hari", 567}};
+//
+//    map["hari"] = 789;  //change value
+//
+//    map["sham"] = 777;  //add new kV
+//
+//    for (auto & [key, value] : map) {   /// Elegant way !!
+//        cout << key << ": " << value<< endl;
+//    }
+
+
+    /**set*/ // <set> ///tree
+//    set<int> myset = {3,4,1}; //sorted elements, no duplicate
+//    myset.insert(-1);
+//    myset.insert(0);
+//    myset.insert(0);
+//    for (auto & i : myset) {
+//        cout << i << endl;
+//    }
+
+//    // Person class must have operator< implemented to use set
+//    set<Person> persons = {Person("jitendra","yadav" ), Person("jitendra", "kumar")};
+//    for (auto i : persons){
+//        cout << i.getFullName() << endl;
+//    }
+//    //Student class uses operator< of base class : Person
+//    set<Student> students = {Student("jitendra","yadav" , "1234"), Student("jitendra", "kumar", "2345")};
+//    for (auto i : students){
+//        cout << i.getFullName() << endl;
+//    }
+
+
+    /**list*/ // <list>
+//    list<int> list1 = {1,2,3};
+//    list1.push_back(4);
+//    list1.push_front(-2);
+//    for (auto i : list1){
+//        cout << i << endl;
+//    }
+
+
+    /**array*/ //<array> is not resizable("statische große"), initial size should b defined
+//    array<int,4> myarray= {1,2,3,4}; // initial size should not be too big as array is stored in stack
+//    for (auto a : myarray){
+//        cout << a << endl;
+//    }
+
+
+    /**vector*/
+//    vector<int> vector1 = {1,2,3};
+//    int cap = vector1.capacity();
+
+//    vector1.push_back(7);
+//    int cap2 = vector1.capacity();
+
+//    vector1.shrink_to_fit();
+//    int cap3 = vector1.capacity();
+//
+//    for (auto const & i : vector1){ // const & : ensures no change of element allowed
+//        // i = 5;
+//        cout << i << endl;
+//    }
+
+    /**pair*/  //<utility>
+//    auto mypair = make_pair(12, "abcd"); // only two parameters
+//    cout << mypair.first << ", " << mypair.second << endl;
+
+
+    /**tuple*/  //<tuple>
+//    auto tuple2 = make_tuple(1, "hello", 3.14);
+//    cout << get<0>(tuple2) << ", " << get<1>(tuple2) <<", " << get<2>(tuple2) << endl;
+//    tuple<int, int> tuple1 = make_tuple(2,4);
+//    cout << get<0>(tuple1) << ", " << get<1>(tuple1) << endl; // how to retrieve value from tuple
+//
+//    int a =70;
+//    int b =60;
+//    auto [minval, maxval] = tuple_minmax(a,b); // this
+//
+//    int min;
+//    int max;
+//    std::tie(min,max) = tuple_minmax(a,b); //and this both are equivalent if int min and max already defined
+//    cout << minval << ", " << maxval << endl;
+//    cout << min << ", " << max << endl;
+
 
     /**Lambdas*/
 //    auto isEven = [](int toCheck){ return toCheck % 2 == 0; };
@@ -110,6 +185,7 @@ int main() {
 //    bool is4Even = isEven(4);
 //    cout << is4Even << endl;
 
+
 /** functor */
 //auto lamb = [](int val){ return val;};
 //Functor func ;     // both are equivalent (defined in lambda.h)
@@ -118,6 +194,7 @@ int main() {
 //cout << lamb(7) << endl;
 //cout << func(7) << endl;
 
+
 /**Lambda Captures*/
 //auto add3 = createLambda(3);
 //auto add5 = createLambda(5);
@@ -125,17 +202,17 @@ int main() {
 //cout << "add 3 + 20 = " << add3(20) << endl;
 //cout << "add 5 + 10 = " <<  add5(10) << endl;
 
-    int x = 1;
-    int y = 2;
-    int z = 3;
-
-    auto increment = [&, a=x+10]() mutable {
-        x = a;
-        ++y;
-        ++z;
-    };
-
-    increment();
+//    int x = 1;
+//    int y = 2;
+//    int z = 3;
+//
+//    auto increment = [&, a=x+10]() mutable {
+//        x = a;
+//        ++y;
+//        ++z;
+//    };
+//
+//    increment();
 
 
 

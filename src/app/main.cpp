@@ -43,6 +43,7 @@ using std::array;
 #include "stackDemo.h"
 #include "QueueDemo.h"
 #include "priorityqueueDemo.h"
+#include "algorithmDemo.h"
 
 ///BadHash Functor
 class BadHash{
@@ -56,6 +57,13 @@ public:
 int main() {
     using namespace std;
 
+    ///algorithm
+//    algoDemo();
+//    counting();
+//    eraseRemove();
+    iteratorExample();
+
+
     /// stack
 //    stackDemo();
 
@@ -63,7 +71,7 @@ int main() {
 //    queueDemo();
 
     /// priority_queue
-    priorityQueueDemo();
+//    priorityQueueDemo();
 
     /// unordered_set
 //  unordered_set<int> uset; // without BadHash : default hash function

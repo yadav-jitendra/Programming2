@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -35,6 +36,8 @@ using std::array;
 #include "Student.h"
 #include "House.h"
 #include "lambda.h"
+#include <iomanip>
+#include <cmath>
 
 #include <map>
 #include "helper.h"
@@ -44,12 +47,15 @@ using std::array;
 #include "QueueDemo.h"
 #include "priorityqueueDemo.h"
 #include "algorithmDemo.h"
+#include "precisedemo.h"
+#include "moveSemantik.h"
 
 ///BadHash Functor
-class BadHash{
-public:
-    int operator()(int) const { return 1; };
-};
+//class BadHash{
+//public:
+//    int operator()(int) const { return 1; };
+//};
+
 
 /**
  * MAIN METHODE
@@ -57,11 +63,14 @@ public:
 int main() {
     using namespace std;
 
+    moveSemantik();
+//    precise();
+
     ///algorithm
 //    algoDemo();
 //    counting();
 //    eraseRemove();
-    iteratorExample();
+//    iteratorExample();
 
 
     /// stack

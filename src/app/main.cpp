@@ -49,6 +49,9 @@ using std::array;
 #include "algorithmDemo.h"
 #include "precisedemo.h"
 #include "moveSemantik.h"
+#include "threadDemo.h"
+#include "producerConsumer.h"
+#include "shadedDaata.h"
 
 ///BadHash Functor
 //class BadHash{
@@ -63,7 +66,12 @@ using std::array;
 int main() {
     using namespace std;
 
-    moveSemantik();
+    //producerConsumer();
+    sharedDataDemo();
+
+   // mythread();
+
+    //moveSemantik();
 //    precise();
 
     ///algorithm

@@ -5,6 +5,12 @@
 #ifndef STARTINGC___HELPER_H
 #define STARTINGC___HELPER_H
 
+///BadHash Functor
+//class BadHash{
+//public:
+//    int operator()(int) const { return 1; };
+//};
+
 
 /**
  * Template

@@ -52,12 +52,8 @@ using std::array;
 #include "threadDemo.h"
 #include "producerConsumer.h"
 #include "shadedDaata.h"
+#include "multithreading.h"
 
-///BadHash Functor
-//class BadHash{
-//public:
-//    int operator()(int) const { return 1; };
-//};
 
 
 /**
@@ -66,8 +62,14 @@ using std::array;
 int main() {
     using namespace std;
 
+///    Multithreading
+//    t_main();
+//    main_mutex();
+//    main_prodConsum();
+    main_futurePromiseAsync();
+
     //producerConsumer();
-    sharedDataDemo();
+//    sharedDataDemo();
 
    // mythread();
 
